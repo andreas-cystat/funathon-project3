@@ -42,8 +42,8 @@ def get_patchs_labels(
         labels = [filename.split('.')[0]+'.npy' for filename in patchs]
 
     else:
-        patchs_path = f"data/data-preprocessed/patchs/{nuts}/{year}"
-        labels_path = f"data/data-preprocessed/labels/{nuts}/{year}"
+        patchs_path = f"../../data/data-preprocessed/patchs/{nuts}/{year}"
+        labels_path = f"../../data/data-preprocessed/labels/{nuts}/{year}"
 
         download_data(patchs_path, labels_path, nuts, year)
 

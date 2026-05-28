@@ -64,7 +64,7 @@ def download_data(
                 "mc",
                 "cp",
                 f"public/projet-funathon/2026/project3/data/images/{nuts_3}/{year}/{filename_patch}",  # noqa
-                f"data/data-preprocessed/patchs/{nuts_3}/{year}/",
+                f"../../data/data-preprocessed/patchs/{nuts_3}/{year}/",
             ]
             subprocess.run(patch_cmd, check=True, stdout=devnull, stderr=devnull)
 
@@ -73,7 +73,7 @@ def download_data(
             "mc",
             "cp",
             f"public/projet-funathon/2026/project3/data/images/{nuts_3}/{year}/metrics-normalization.yaml",  # noqa
-            f"data/data-preprocessed/patchs/{nuts_3}/{year}/",
+            f"../../data/data-preprocessed/patchs/{nuts_3}/{year}/",
         ]
         subprocess.run(
             normalization_metrics_cmd, check=True, stdout=devnull, stderr=devnull
@@ -84,7 +84,7 @@ def download_data(
             "mc",
             "cp",
             f"public/projet-funathon/2026/project3/data/images/{nuts_3}/{year}/filename2bbox.parquet",  # noqa
-            f"data/data-preprocessed/patchs/{nuts_3}/{year}/",
+            f"../../data/data-preprocessed/patchs/{nuts_3}/{year}/",
         ]
         subprocess.run(filename2bbox_cmd, check=True, stdout=devnull, stderr=devnull)
 
@@ -94,7 +94,7 @@ def download_data(
                 "mc",
                 "cp",
                 f"public/projet-funathon/2026/project3/data/labels/{nuts_3}/{year}/{filename_label}",  # noqa
-                f"data/data-preprocessed/labels/{nuts_3}/{year}/",
+                f"../../data/data-preprocessed/labels/{nuts_3}/{year}/",
             ]
             subprocess.run(label_cmd, check=True, stdout=devnull, stderr=devnull)
     print("Downloading finished!\n")

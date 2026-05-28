@@ -23,7 +23,7 @@ def normalization_params(nuts: str, year: str):
     """
 
     params_path = (
-        f"data/data-preprocessed/patchs/{nuts}/{year}/metrics-normalization.yaml"
+        f"../../data/data-preprocessed/patchs/{nuts}/{year}/metrics-normalization.yaml"
     )
 
     with open(params_path) as f:
