@@ -7,6 +7,16 @@ import numpy as np
 from PIL import Image
 import requests
 from s3fs import S3FileSystem
+from dotenv import load_dotenv
+from pytorch_lightning.loggers import MLFlowLogger
+
+load_dotenv()
+
+mlf_logger = MLFlowLogger(
+    experiment_name="segformer-satellite",
+    tracking_uri=os.getenv("MLFLOW_TRACKING_URI"),
+    log_model=True,   # upload the best checkpoint as an MLflow artifact
+)
 
 
 def get_file_system() -> S3FileSystem:

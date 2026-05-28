@@ -29,6 +29,7 @@ from src.data.normalization import compute_global_normalization
 from src.data.transforms import build_transform
 from src.training.lightning import get_lightning_module
 from src.data.dataset import SegmentationDataset
+from src.utils import mlf_logger
 
 
 # ==========================================================
@@ -175,11 +176,20 @@ callbacks = [
     ),
 ]
 
+mlf_logger.log_hyperparams({
+    "lr": CONFIG["lr"],
+    "batch_size": CONFIG["batch_size"],
+    "epochs": CONFIG["epochs"],
+    "freeze_encoder": False,
+    "n_bands": CONFIG["n_bands"],
+})
+
 trainer = pl.Trainer(
     max_epochs=CONFIG["epochs"],
     accelerator="auto",
     devices="auto",
     callbacks=callbacks,
+    logger=mlf_logger,
     log_every_n_steps=10,
 )
 
