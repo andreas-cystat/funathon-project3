@@ -40,22 +40,22 @@ CONFIG = {
     "train_regions": [
         "AT332",
         "BE100",
-        "BE251",
+        # "BE251",
         "BG322",
-        "DEA54",
+        # "DEA54",
         "FRJ27",
-        "LU000",
+        # "LU000",
     ],
     "train_years": ["2018", "2021"],
-    "test_regions": ["BE100", "DEA54", "LU000"],
+    "test_regions": ["BE100", "BG322"],
     "test_year": "2021",
-    "batch_size": 32,
-    "test_batch_size": 16,
-    "epochs": 20,
+    "batch_size": 16,
+    "test_batch_size": 8,
+    "epochs": 10,
     "lr": 1e-3,
     "n_bands": 14,
     "resize": 512,
-    "num_workers": os.cpu_count(),
+    # "num_workers": os.cpu_count(),
     "seed": 42,
 }
 
@@ -141,21 +141,18 @@ train_loader = DataLoader(
     train_dataset,
     batch_size=CONFIG["batch_size"],
     shuffle=True,
-    num_workers=CONFIG["num_workers"],
     pin_memory=True,
 )
 
 val_loader = DataLoader(
     val_dataset,
     batch_size=CONFIG["batch_size"],
-    num_workers=CONFIG["num_workers"],
     pin_memory=True,
 )
 
 test_loader = DataLoader(
     test_dataset,
     batch_size=CONFIG["test_batch_size"],
-    num_workers=CONFIG["num_workers"],
     pin_memory=True,
 )
 
@@ -163,13 +160,14 @@ test_loader = DataLoader(
 model = get_lightning_module(
     n_bands=CONFIG["n_bands"],
     lr=CONFIG["lr"],
+    freeze_encoder=True,
 )
 
 # -------- Trainer --------
 callbacks = [
-    EarlyStopping(monitor="val_loss", patience=5, mode="min"),
+    EarlyStopping(monitor="validation_loss", patience=5, mode="min"),
     ModelCheckpoint(
-        monitor="val_loss",
+        monitor="validation_loss",
         mode="min",
         save_top_k=1,
         filename="best-model",
@@ -180,7 +178,7 @@ mlf_logger.log_hyperparams({
     "lr": CONFIG["lr"],
     "batch_size": CONFIG["batch_size"],
     "epochs": CONFIG["epochs"],
-    "freeze_encoder": False,
+    "freeze_encoder": True,
     "n_bands": CONFIG["n_bands"],
 })
 

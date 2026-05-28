@@ -14,6 +14,7 @@ from src.models.module import SegmentationModule
 
 def get_lightning_module(
     n_bands: int,
+    freeze_encoder: bool,
     lr: float,
     weights=None,
     label_smoothing: float = 0.0,
@@ -26,6 +27,7 @@ def get_lightning_module(
 
     model = SegformerB5(
         n_bands=n_bands,
+        freeze_encoder=freeze_encoder,
     )
 
     if weights is not None:

@@ -31,8 +31,8 @@ dependencies = [
     "s3fs>=2026.2.0",
     "scikit-learn>=1.6.1",
     "scipy>=1.15.2",
-    "torch>=2.11.0",
-    "torchvision>=0.26.0",
+    "torch",
+    "torchvision",
     "transformers>=5.5.1",
 ]
 
@@ -41,6 +41,8 @@ gdal = [
   { index = "gdal-wheels", marker = "sys_platform == 'linux'" },
   { index = "geospatial_wheels", marker = "sys_platform == 'win32'" },
 ]
+torch = { index = "pytorch-cu118" }
+torchvision = { index = "pytorch-cu118" }
 
 [[tool.uv.index]]
 name = "geospatial_wheels"
@@ -50,4 +52,9 @@ explicit = true
 [[tool.uv.index]]
 name = "gdal-wheels"
 url = "https://gitlab.com/api/v4/projects/61637378/packages/pypi/simple"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
 explicit = true
